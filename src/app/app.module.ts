@@ -2,16 +2,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { fakeBackendProvider } from './_helpers';
+import { fakeBackendProvider } from './helpers';
 import { AppComponent }  from './app.component';
 import { routing }  from './app.routing';
 
-import { AlertComponent } from './_components';
-import { JwtInterceptor, ErrorInterceptor } from './_helpers';
-import { HomeComponent } from './home';
-import { LoginComponent } from './login';
-import { RegisterComponent } from './register';;
-import { TodoComponent } from './todo/todo.component'
+import { AlertComponent } from './components/alert';
+import { JwtInterceptor, ErrorInterceptor } from './helpers';
+import { HomeComponent } from './components/home';
+import { LoginComponent } from './components/login';
+import { RegisterComponent } from './components/register';;
+import { TodoComponent } from './components/todo/todo.component'
 
 @NgModule({
     imports: [
