@@ -3,10 +3,11 @@
   <h3>Your current setting:</h3>
   <div class="border" [ngStyle]="{'padding':'10px 10px 10px 10px', 'font-family':'Segoe Print', 'border-radius': '15px'}">
     <b> Email:  {{currentUser.email}}   <input id="email" type="text" [ngStyle]="{'float':'right'}"> 
-
-      <br><br> Name: {{currentUser.firstName}} <input id="name" type="text" [ngStyle]="{'float':'right'}">
-      <br><br> Surname: {{currentUser.lastName}} <input id="surname" type="text" [ngStyle]="{'float':'right'}">
-      <br><br> Phone: {{currentUser.phone}} <input id="phone" type="text" [ngStyle]="{'float':'right'}"><br><br>
+    <br><br> Name: {{currentUser.firstName}} <input id="name" type="text" [ngStyle]="{'float':'right'}">
+    <br><br> Surname: {{currentUser.lastName}} <input id="surname" type="text" [ngStyle]="{'float':'right'}">
+    <br><br> Phone: {{currentUser.phone}} <input id="phone" type="text" [ngStyle]="{'float':'right'}">
+    <br><br> Phone: {{currentUser.password}} <input id="phone" type="text" [ngStyle]="{'float':'right'}">
+    <br><br>
     </b> 
     <button type="button" class="btn btn-primary" [ngStyle]="{'margin-left':'200px'}" (click)="changeUser(currentUser)">Change</button>
   </div>  
