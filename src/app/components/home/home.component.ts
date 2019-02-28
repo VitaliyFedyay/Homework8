@@ -1,37 +1,65 @@
 ﻿import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertService, UserService, AuthenticationService } from '@app/services';
 
-import { User } from '@app/models';
-import { UserService, AuthenticationService } from '@app/services';
+@Component({ 
+  templateUrl: 'home.component.html',
+  styleUrls: ['./home.component.scss']
+})
 
-@Component({ templateUrl: 'home.component.html' })
-export class HomeComponent implements OnInit, OnDestroy {
-    currentUser: User;
-    currentUserSubscription: Subscription;
-    users: User[] = [];
+export class HomeComponent implements OnInit {
+    
+    registerForm: FormGroup;
+    loading = false;
+    submitted = false;
 
     constructor(
+        private formBuilder: FormBuilder,
+        private router: Router,
         private authenticationService: AuthenticationService,
-        private userService: UserService
-    ) {
-        this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
-            this.currentUser = user;
-        });
+        private userService: UserService,
+        private alertService: AlertService
+    ) { 
+        // redirect to home if already logged in
+        if (this.authenticationService.currentUserValue) { 
+            this.router.navigate(['/']);
+        }
     }
 
     ngOnInit() {
-        this.loadAllUsers();
-    }
-
-    ngOnDestroy() {
-        // unsubscribe to ensure no memory leaks
-        this.currentUserSubscription.unsubscribe();
-    }
-
-    private loadAllUsers() {
-        this.userService.getAll().pipe(first()).subscribe(users => {
-            this.users = users;
+        this.registerForm = this.formBuilder.group({
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            email: ['', Validators.required],
+            phone: ['', Validators.required],
+            password: ['', [Validators.required, Validators.minLength(8)]]
         });
+    }
+
+    // convenience getter for easy access to form fields
+    get f() { return this.registerForm.controls; }
+
+    onSubmit() {
+        this.submitted = true;
+
+        // stop here if form is invalid
+        if (this.registerForm.invalid) {
+            return;
+        }
+
+        this.loading = true;
+        this.userService.register(this.registerForm.value)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    this.alertService.success('Change user successful', true);
+                    this.router.navigate(['/login']);
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
     }
 }

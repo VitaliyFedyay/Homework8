@@ -8,18 +8,20 @@
               <mat-hint style = "color: rebeccapurple; font-size: 15px;" *ngIf="msg"> {{msg}} </mat-hint>
             </mat-form-field>
           </div>
+
           <div class="col-md-4">
-            <button type="submit" class="w-100 btn-submit" (click)="addTodo(todo)" mat-raised-button color="primary">
+            <button type="submit" class="w-100 btn-submit btn btn-color" (click)="addTodo(todo)" mat-raised-button color="">
               ENTER
             </button>
           </div>
         </div>
       </form>
     </div>
+
     <div *ngIf="todos.length !== 0 || dones.length !== 0 else noItems" class="row d-flex">
-      <div style="border:1px solid #ccc; border-radius: 5px; padding: 5px;" class="col-md-6 right-10">
+      <div style="border:1px solid #ccc; border-radius: 5px; padding: 5px;" class="col-md-6 right-2">
         <h3 class="text-center p-2">{{todosTitle}}</h3>
-        <mat-card class="m-3" *ngFor="let todo of todos"><span #todoName>{{todo}}</span>
+        <mat-card class="m-5" *ngFor="let todo of todos"><span #todoName>{{todo}}</span>
           <span>
             <button class="btn btn-sm btn-danger float-right ml-1" (click)="removeTodo(todoName)"><i
               class="fa fa-remove"></i> Delete </button>
@@ -28,9 +30,10 @@
           </span>
         </mat-card>
       </div>
-      <div style="border:1px solid #ccc; border-radius: 5px; padding: 5px" class="col-md-6">
+
+      <div style="border:1px solid #ccc; border-radius: 5px; padding: 5px" class="col-6">
         <h3 class="text-center p-2">{{donesTitle}}</h3>
-        <mat-card class="m-3" *ngFor="let done of dones">
+        <mat-card class="m-5" *ngFor="let done of dones">
           <span #doneName>{{done}}</span>
           <span>
             <button class="btn btn-sm btn-danger float-right ml-1" (click)="removeDone(doneName)"><i
@@ -40,8 +43,5 @@
       </div>
     </div>
   </div>
-  
-  <ng-template #noItems>
-    {{emptyInfo}}
-  </ng-template>
+
   
