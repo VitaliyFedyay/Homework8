@@ -1,5 +1,5 @@
 # Homework8
-Homework8 - is a project with user registration, login and todo.
+Homework8 - is a project with user registration, login and todo https://github.com/VitaliyFedyay/Homework8.git
 
 ## Installation
 
